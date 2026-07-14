@@ -66,8 +66,12 @@ const navItems = Array.from(document.querySelectorAll(".nav-item"));
 const sections = Array.from(document.querySelectorAll(".page-section"));
 
 const themeButton = document.querySelector("#themeButton");
+
 const deleteAllDataButton = document.querySelector(
     "#deleteAllDataButton"
+    );
+const quickActionButtons = Array.from(
+    document.querySelectorAll(".quick-action-button")
 );
 
 function saveToStorage(key, value) {
@@ -382,6 +386,29 @@ function showSection(sectionId) {
     });
 }
 
+function handleQuickAction(button) {
+    const targetSection = button.dataset.targetSection;
+    const focusElementId = button.dataset.focusElement;
+
+    showSection(targetSection);
+
+    if (!focusElementId) {
+        return;
+    }
+
+    window.setTimeout(() => {
+        const focusElement = document.getElementById(focusElementId);
+
+        if (focusElement) {
+            focusElement.focus();
+            focusElement.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+    }, 100);
+}
+
 function loadTheme() {
     const savedTheme = loadFromStorage(
         STORAGE_KEYS.theme,
@@ -434,7 +461,7 @@ function initializeApplication() {
         STORAGE_KEYS.permit,
         null
 
-  );
+    );
 
     const appointment = loadFromStorage(
         STORAGE_KEYS.appointment,
@@ -450,10 +477,11 @@ function initializeApplication() {
     updateAppointmentDisplay(appointment);
     updateApplicationStatus(applicationStatus);
     loadDocumentSelection();
-    loadTheme();
 
-updateCurrentDate();
-updateTasks();
+    loadTheme();
+     
+    updateCurrentDate();
+    updateTasks();
 }
 
 permitForm.addEventListener(
@@ -486,6 +514,11 @@ appointmentForm.addEventListener(
 navItems.forEach((item) => {
     item.addEventListener("click", () => {
         showSection(item.dataset.section);
+    });
+});
+quickActionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        handleQuickAction(button);
     });
 });
 
