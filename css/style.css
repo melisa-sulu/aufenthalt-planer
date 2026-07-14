@@ -576,4 +576,60 @@ body.dark-mode .progress-track {
     .content-card {
         padding: 20px;
     }
+}.task-list {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.task-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--surface-secondary);
+}
+
+.task-icon {
+    font-size: 20px;
+}
+.tasks-card {
+    margin-bottom: 22px;
+}
+
+.tasks-card .card-header {
+    margin-bottom: 18px;
+}
+
+.task-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.task-list li {
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-medium);
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.task-icon {
+    flex: 0 0 auto;
+    font-size: 22px;
+}
+
+@media (max-width: 850px) {
+    .task-list {
+        grid-template-columns: 1fr;
+    }
 }

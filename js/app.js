@@ -27,7 +27,7 @@ const permitTypeInput = document.querySelector("#permitType");
 const permitResult = document.querySelector("#permitResult");
 const daysRemainingElement = document.querySelector("#daysRemaining");
 const permitStatusElement = document.querySelector("#permitStatus");
-
+const currentDateElement = document.querySelector("#currentDate");
 const applicationStatusInput = document.querySelector(
     "#applicationStatus"
 );
@@ -427,7 +427,8 @@ function initializeApplication() {
     const permit = loadFromStorage(
         STORAGE_KEYS.permit,
         null
-    );
+
+  );
 
     const appointment = loadFromStorage(
         STORAGE_KEYS.appointment,
@@ -444,6 +445,7 @@ function initializeApplication() {
     updateApplicationStatus(applicationStatus);
     loadDocumentSelection();
     loadTheme();
+updateCurrentDate();
 }
 
 permitForm.addEventListener(
@@ -488,5 +490,16 @@ deleteAllDataButton.addEventListener(
     "click",
     deleteAllData
 );
+function updateCurrentDate() {
+    const today = new Date();
 
+    const formattedDate = today.toLocaleDateString("de-DE", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+
+    currentDateElement.textContent = `Heute: ${formattedDate}`;
+}
 initializeApplication();
