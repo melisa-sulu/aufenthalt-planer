@@ -28,6 +28,9 @@ const permitResult = document.querySelector("#permitResult");
 const daysRemainingElement = document.querySelector("#daysRemaining");
 const permitStatusElement = document.querySelector("#permitStatus");
 const currentDateElement = document.querySelector("#currentDate");
+const permitTask = document.querySelector("#permitTask span:last-child");
+const appointmentTask = document.querySelector("#appointmentTask span:last-child");
+const documentsTask = document.querySelector("#documentsTask span:last-child");
 const applicationStatusInput = document.querySelector(
     "#applicationStatus"
 );
@@ -198,6 +201,7 @@ function handlePermitSubmit(event) {
 
     saveToStorage(STORAGE_KEYS.permit, permit);
     updatePermitDisplay(permit);
+    updateTasks();
 }
 
 function updateApplicationStatus(status) {
@@ -253,6 +257,7 @@ function saveDocumentSelection() {
     );
 
     updateDocumentProgress();
+    updateTasks();
 }
 
 function loadDocumentSelection() {
@@ -358,6 +363,7 @@ function handleAppointmentSubmit(event) {
     );
 
     updateAppointmentDisplay(appointment);
+    updateTasks();
 }
 
 function showSection(sectionId) {
@@ -445,7 +451,9 @@ function initializeApplication() {
     updateApplicationStatus(applicationStatus);
     loadDocumentSelection();
     loadTheme();
+
 updateCurrentDate();
+updateTasks();
 }
 
 permitForm.addEventListener(
@@ -501,5 +509,67 @@ function updateCurrentDate() {
     });
 
     currentDateElement.textContent = `Heute: ${formattedDate}`;
+}
+function updateTasks() {
+    const permit = loadFromStorage(
+        STORAGE_KEYS.permit,
+        null
+    );
+
+    const appointment = loadFromStorage(
+        STORAGE_KEYS.appointment,
+        null
+    );
+
+    const selectedDocuments = loadFromStorage(
+        STORAGE_KEYS.documents,
+        []
+    );
+
+    if (!permit || !permit.expiryDate) {
+        permitTask.textContent =
+            "Aufenthaltstitel noch nicht eingetragen";
+    } else {
+        const days = calculateDaysRemaining(permit.expiryDate);
+
+        if (days < 0) {
+            permitTask.textContent =
+                `Aufenthaltstitel seit ${Math.abs(days)} Tagen abgelaufen`;
+        } else if (days === 0) {
+            permitTask.textContent =
+                "Aufenthaltstitel läuft heute ab";
+        } else if (days <= 60) {
+            permitTask.textContent =
+                `Verlängerung vorbereiten: noch ${days} Tage`;
+        } else {
+            permitTask.textContent =
+                `Aufenthaltstitel noch ${days} Tage gültig`;
+        }
+    }
+
+    if (!appointment || !appointment.date) {
+        appointmentTask.textContent =
+            "Kein Termin vorhanden";
+    } else {
+        const formattedDate = formatGermanDate(
+            appointment.date
+        );
+
+        appointmentTask.textContent =
+            `Termin am ${formattedDate}`;
+    }
+
+    const completedDocuments = selectedDocuments.length;
+    const totalDocuments = documentCheckboxes.length;
+    const missingDocuments =
+        totalDocuments - completedDocuments;
+
+    if (missingDocuments === 0) {
+        documentsTask.textContent =
+            "Alle Unterlagen vorbereitet";
+    } else {
+        documentsTask.textContent =
+            `${missingDocuments} Unterlagen fehlen`;
+    }
 }
 initializeApplication();
