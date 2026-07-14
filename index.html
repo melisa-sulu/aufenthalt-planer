@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Ein persönlicher Planer für Aufenthaltstitel, Termine und erforderliche Unterlagen."
+    >
+
+    <title>AufenthaltPlaner</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">AP</div>
+
+                <div>
+                    <h1>AufenthaltPlaner</h1>
+                    <p>Persönliche Übersicht</p>
+                </div>
+            </div>
+
+            <nav class="navigation" aria-label="Hauptnavigation">
+                <button class="nav-item active" data-section="dashboard">
+                    Übersicht
+                </button>
+
+                <button class="nav-item" data-section="documents">
+                    Unterlagen
+                </button>
+
+                <button class="nav-item" data-section="appointments">
+                    Termine
+                </button>
+
+                <button class="nav-item" data-section="settings">
+                    Einstellungen
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Lokale Datenspeicherung</p>
+                <span>Keine Daten werden hochgeladen.</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">AUFENTHALTSORGANISATION</p>
+                    <h2>Guten Tag</h2>
+                    <p class="page-description">
+                        Behalte Fristen, Termine und Unterlagen im Blick.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="themeButton"
+                    aria-label="Farbschema wechseln"
+                >
+                    Dunkelmodus
+                </button>
+            </header>
+
+            <section
+                class="page-section active-section"
+                id="dashboard"
+            >
+                <div class="section-heading">
+                    <div>
+                        <h3>Übersicht</h3>
+                        <p>Die wichtigsten Informationen auf einen Blick.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <p class="stat-label">Aufenthaltstitel</p>
+                        <strong class="stat-value" id="daysRemaining">
+                            Noch nicht eingetragen
+                        </strong>
+                        <span class="status-badge neutral" id="permitStatus">
+                            Kein Datum
+                        </span>
+                    </article>
+
+                    <article class="stat-card">
+                        <p class="stat-label">Nächster Termin</p>
+                        <strong class="stat-value" id="nextAppointment">
+                            Kein Termin
+                        </strong>
+                        <span class="stat-detail" id="appointmentOffice">
+                            Noch nicht eingetragen
+                        </span>
+                    </article>
+
+                    <article class="stat-card">
+                        <p class="stat-label">Unterlagen</p>
+                        <strong class="stat-value" id="documentProgress">
+                            0 von 6
+                        </strong>
+                        <span class="stat-detail">
+                            Unterlagen vorbereitet
+                        </span>
+                    </article>
+
+                    <article class="stat-card">
+                        <p class="stat-label">Antragsstatus</p>
+                        <strong class="stat-value" id="applicationStatusCard">
+                            Nicht begonnen
+                        </strong>
+                        <span class="stat-detail">
+                            Aktueller Bearbeitungsstand
+                        </span>
+                    </article>
+                </div>
+
+                <div class="dashboard-grid">
+
+                    <article class="content-card">
+                        <div class="card-header">
+                            <div>
+                                <h4>Aufenthaltstitel</h4>
+                                <p>Gültigkeitsdatum verwalten</p>
+                            </div>
+                        </div>
+
+                        <form id="permitForm" class="form-grid">
+                            <div class="form-group">
+                                <label for="permitExpiry">
+                                    Gültig bis
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="permitExpiry"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="permitType">
+                                    Art des Aufenthaltstitels
+                                </label>
+
+                                <select id="permitType">
+                                    <option value="Aufenthaltserlaubnis">
+                                        Aufenthaltserlaubnis
+                                    </option>
+
+                                    <option value="Fiktionsbescheinigung">
+                                        Fiktionsbescheinigung
+                                    </option>
+
+                                    <option value="Niederlassungserlaubnis">
+                                        Niederlassungserlaubnis
+                                    </option>
+
+                                    <option value="Visum">
+                                        Visum
+                                    </option>
+
+                                    <option value="Sonstiges">
+                                        Sonstiges
+                                    </option>
+                                </select>
+                            </div>
+
+                            <button class="primary-button" type="submit">
+                                Speichern
+                            </button>
+                        </form>
+
+                        <div class="result-box" id="permitResult">
+                            Trage ein Gültigkeitsdatum ein, um die verbleibenden
+                            Tage zu berechnen.
+                        </div>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-header">
+                            <div>
+                                <h4>Antragsstatus</h4>
+                                <p>Aktuellen Stand auswählen</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="applicationStatus">
+                                Bearbeitungsstand
+                            </label>
+
+                            <select id="applicationStatus">
+                                <option value="Nicht begonnen">
+                                    Nicht begonnen
+                                </option>
+
+                                <option value="Termin angefragt">
+                                    Termin angefragt
+                                </option>
+
+                                <option value="Termin erhalten">
+                                    Termin erhalten
+                                </option>
+
+                                <option value="Unterlagen vorbereitet">
+                                    Unterlagen vorbereitet
+                                </option>
+
+                                <option value="Antrag eingereicht">
+                                    Antrag eingereicht
+                                </option>
+
+                                <option value="In Bearbeitung">
+                                    In Bearbeitung
+                                </option>
+
+                                <option value="Weitere Unterlagen erforderlich">
+                                    Weitere Unterlagen erforderlich
+                                </option>
+
+                                <option value="Genehmigt">
+                                    Genehmigt
+                                </option>
+
+                                <option value="Karte wird hergestellt">
+                                    Karte wird hergestellt
+                                </option>
+
+                                <option value="Abgeschlossen">
+                                    Abgeschlossen
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="progress-wrapper">
+                            <div class="progress-information">
+                                <span>Fortschritt</span>
+                                <strong id="progressText">0 %</strong>
+                            </div>
+
+                            <div
+                                class="progress-track"
+                                role="progressbar"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow="0"
+                                id="progressTrack"
+                            >
+                                <div
+                                    class="progress-bar"
+                                    id="progressBar"
+                                ></div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <section class="page-section" id="documents">
+                <div class="section-heading">
+                    <div>
+                        <h3>Unterlagen</h3>
+                        <p>
+                            Markiere die Dokumente, die bereits vorbereitet sind.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="resetDocumentsButton"
+                    >
+                        Auswahl zurücksetzen
+                    </button>
+                </div>
+
+                <div class="document-list" id="documentList">
+
+                    <label class="document-item">
+                        <input type="checkbox" data-document="Reisepass">
+
+                        <span class="document-checkbox"></span>
+
+                        <span>
+                            <strong>Reisepass</strong>
+                            <small>
+                                Gültiger Pass und Kopie der Datenseite
+                            </small>
+                        </span>
+                    </label>
+
+                    <label class="document-item">
+                        <input
+                            type="checkbox"
+                            data-document="Biometrisches Passfoto"
+                        >
+
+                        <span class="document-checkbox"></span>
+
+                        <span>
+                            <strong>Biometrisches Passfoto</strong>
+                            <small>
+                                Aktuelles Foto nach biometrischen Vorgaben
+                            </small>
+                        </span>
+                    </label>
+
+                    <label class="document-item">
+                        <input
+                            type="checkbox"
+                            data-document="Meldebescheinigung"
+                        >
+
+                        <span class="document-checkbox"></span>
+
+                        <span>
+                            <strong>Meldebescheinigung</strong>
+                            <small>
+                                Nachweis über den aktuellen Wohnsitz
+                            </small>
+                        </span>
+                    </label>
+
+                    <label class="document-item">
+                        <input
+                            type="checkbox"
+                            data-document="Krankenversicherung"
+                        >
+
+                        <span class="document-checkbox"></span>
+
+                        <span>
+                            <strong>Krankenversicherungsnachweis</strong>
+                            <small>
+                                Aktuelle Versicherungsbescheinigung
+                            </small>
+                        </span>
+                    </label>
+
+                    <label class="document-item">
+                        <input
+                            type="checkbox"
+                            data-document="Immatrikulationsbescheinigung"
+                        >
+
+                        <span class="document-checkbox"></span>
+
+                        <span>
+                            <strong>Immatrikulationsbescheinigung</strong>
+                            <small>
+                                Aktuelle Bescheinigung der Hochschule
+                            </small>
+                        </span>
+                    </label>
+
+                    <label class="document-item">
+                        <input
+                            type="checkbox"
+                            data-document="Finanzierungsnachweis"
+                        >
+
+                        <span class="document-checkbox"></span>
+
+                        <span>
+                            <strong>Finanzierungsnachweis</strong>
+                            <small>
+                                Zum Beispiel Sperrkonto oder Stipendium
+                            </small>
+                        </span>
+                    </label>
+
+                </div>
+            </section>
+
+            <section class="page-section" id="appointments">
+                <div class="section-heading">
+                    <div>
+                        <h3>Termine</h3>
+                        <p>
+                            Speichere deinen nächsten Behördentermin.
+                        </p>
+                    </div>
+                </div>
+
+                <article class="content-card">
+                    <form id="appointmentForm" class="form-grid">
+
+                        <div class="form-group">
+                            <label for="appointmentDate">
+                                Datum
+                            </label>
+
+                            <input
+                                type="date"
+                                id="appointmentDate"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="appointmentTime">
+                                Uhrzeit
+                            </label>
+
+                            <input
+                                type="time"
+                                id="appointmentTime"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="appointmentOfficeInput">
+                                Behörde oder Standort
+                            </label>
+
+                            <input
+                                type="text"
+                                id="appointmentOfficeInput"
+                                maxlength="100"
+                                placeholder="z. B. Ausländerbehörde Karlsruhe"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="appointmentPurpose">
+                                Anliegen
+                            </label>
+
+                            <input
+                                type="text"
+                                id="appointmentPurpose"
+                                maxlength="120"
+                                placeholder="z. B. Verlängerung des Aufenthaltstitels"
+                            >
+                        </div>
+
+                        <button class="primary-button" type="submit">
+                            Termin speichern
+                        </button>
+                    </form>
+
+                    <div class="result-box" id="appointmentResult">
+                        Noch kein Termin gespeichert.
+                    </div>
+                </article>
+            </section>
+
+            <section class="page-section" id="settings">
+                <div class="section-heading">
+                    <div>
+                        <h3>Einstellungen</h3>
+                        <p>Lokale Daten und Anwendung verwalten.</p>
+                    </div>
+                </div>
+
+                <article class="content-card danger-zone">
+                    <h4>Lokale Daten löschen</h4>
+
+                    <p>
+                        Dadurch werden alle in diesem Browser gespeicherten
+                        Angaben entfernt.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="danger-button"
+                        id="deleteAllDataButton"
+                    >
+                        Alle Daten löschen
+                    </button>
+                </article>
+            </section>
+
+            <footer class="page-footer">
+                <p>
+                    Dieses Projekt ist kein offizielles Angebot einer Behörde
+                    und ersetzt keine Rechtsberatung.
+                </p>
+
+                <p>
+                    Keine Passnummern, Kartennummern oder finanziellen
+                    Zugangsdaten eingeben.
+                </p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
