@@ -62,6 +62,18 @@ const appointmentTimeInput = document.querySelector("#appointmentTime");
 const appointmentOfficeInput = document.querySelector(
     "#appointmentOfficeInput"
 );
+
+const permitProgressBar = document.querySelector(
+    "#permitProgressBar"
+);
+
+const permitProgressTrack = document.querySelector(
+    "#permitProgressTrack"
+);
+
+const permitProgressLabel = document.querySelector(
+    "#permitProgressLabel"
+);
 const appointmentPurposeInput = document.querySelector(
     "#appointmentPurpose"
 );
@@ -608,6 +620,53 @@ function updateHeroStatus() {
     heroDocumentStatus.textContent =
         `${selectedDocuments.length} von ` +
         `${documentCheckboxes.length} vorbereitet`;
+        if (!permit || !permit.expiryDate) {
+    permitProgressBar.style.width = "0%";
+    permitProgressBar.style.background = "#94a3b8";
+
+    permitProgressLabel.textContent =
+        "Kein Gültigkeitsdatum";
+
+    permitProgressTrack.setAttribute(
+        "aria-valuenow",
+        "0"
+    );
+
+    return;
+}
+
+const days = calculateDaysRemaining(
+    permit.expiryDate
+);
+
+const maxDays = 180;
+
+let percentage =
+    Math.min(days, maxDays) / maxDays * 100;
+
+percentage = Math.max(0, percentage);
+
+permitProgressBar.style.width =
+    `${percentage}%`;
+
+permitProgressTrack.setAttribute(
+    "aria-valuenow",
+    Math.round(percentage)
+);
+
+permitProgressLabel.textContent =
+    `${days} Tage verbleibend`;
+
+if (days <= 14) {
+    permitProgressBar.style.background =
+        "#ef4444";
+} else if (days <= 60) {
+    permitProgressBar.style.background =
+        "#f59e0b";
+} else {
+    permitProgressBar.style.background =
+        "#22c55e";
+}
 }
 
 function updateTasks() {

@@ -763,4 +763,422 @@ body.dark-mode .progress-track {
     .hero-panel h3 {
         font-size: 24px;
     }
+}.permit-progress-track {
+    margin-top: 14px;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.25);
+}
+
+.permit-progress-bar {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: #34d399;
+    transition: width 0.4s ease;
+}
+
+.permit-progress-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    opacity: 0.9;
+}/* ==================================================
+   PREMIUM REDESIGN
+   ================================================== */
+
+:root {
+    --background: #f6f3ec;
+    --surface: rgba(255, 255, 255, 0.86);
+    --surface-secondary: #f7f7f2;
+
+    --sidebar: #073b35;
+    --sidebar-hover: #10554c;
+
+    --primary: #155e52;
+    --primary-hover: #0d4b42;
+
+    --accent: #d9a441;
+    --accent-soft: #f7e8c5;
+
+    --text-primary: #12233a;
+    --text-secondary: #697386;
+
+    --border: rgba(18, 35, 58, 0.12);
+
+    --success: #4f9f5d;
+    --warning: #d89d35;
+    --danger: #cf4d45;
+
+    --shadow:
+        0 18px 45px rgba(31, 42, 55, 0.08);
+
+    --radius-large: 22px;
+    --radius-medium: 16px;
+}
+
+/* Sayfa genel boşlukları */
+
+.main-content {
+    padding: 42px 48px 42px;
+}
+
+.topbar {
+    position: relative;
+    min-height: 205px;
+    margin-bottom: 42px;
+    padding: 8px 0 28px;
+    overflow: hidden;
+}
+
+.topbar::after {
+    content: "";
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    width: 180px;
+    height: 115px;
+    border-radius: 20px;
+    opacity: 0.12;
+    background:
+        linear-gradient(
+            to bottom,
+            #111111 0 33.33%,
+            #dd0000 33.33% 66.66%,
+            #ffce00 66.66% 100%
+        );
+    transform: rotate(-4deg);
+    pointer-events: none;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+}
+
+.topbar h2 {
+    font-size: clamp(38px, 5vw, 58px);
+    letter-spacing: -0.04em;
+}
+
+.current-date {
+    color: var(--text-primary);
+}
+
+.page-description {
+    font-size: 17px;
+}
+
+/* Sidebar */
+
+.sidebar {
+    padding: 30px 20px;
+    background:
+        linear-gradient(
+            180deg,
+            #073b35 0%,
+            #052f2b 100%
+        );
+}
+
+.brand {
+    padding-bottom: 34px;
+}
+
+.brand-icon {
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(217, 164, 65, 0.75);
+    background: var(--accent-soft);
+    color: #173f39;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.14);
+}
+
+.brand h1 {
+    font-size: 21px;
+}
+
+.brand p {
+    color: #d7c79d;
+}
+
+.navigation {
+    gap: 11px;
+}
+
+.nav-item {
+    min-height: 52px;
+    padding: 14px 16px;
+    border-radius: 13px;
+    font-size: 15px;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-item.active {
+    background:
+        linear-gradient(
+            135deg,
+            #f5dfad,
+            #d9a441
+        );
+    color: #173229;
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.13);
+}
+
+/* Bölümler arasında daha fazla boşluk */
+
+.section-heading {
+    margin-bottom: 26px;
+}
+
+.stats-grid {
+    gap: 22px;
+    margin-bottom: 34px;
+}
+
+.tasks-card {
+    margin-bottom: 38px;
+}
+
+.quick-actions {
+    margin-bottom: 38px;
+}
+
+.dashboard-grid {
+    gap: 28px;
+}
+
+/* Kartlar */
+
+.stat-card,
+.content-card,
+.quick-action-button {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow);
+}
+
+.stat-card {
+    min-height: 175px;
+    padding: 24px;
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.stat-card:hover,
+.content-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 22px 48px rgba(31, 42, 55, 0.12);
+}
+
+.content-card {
+    padding: 30px;
+}
+
+/* Hero panel */
+
+.hero-panel {
+    position: relative;
+    margin-bottom: 36px;
+    padding: 32px;
+    overflow: hidden;
+    border: 1px solid rgba(217, 164, 65, 0.24);
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #103e39 0%,
+            #164f48 55%,
+            #1c6258 100%
+        );
+
+    box-shadow:
+        0 22px 55px rgba(13, 64, 57, 0.24);
+}
+
+.hero-panel::after {
+    content: "";
+    position: absolute;
+    right: -60px;
+    top: -85px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(217, 164, 65, 0.22),
+            transparent 68%
+        );
+    pointer-events: none;
+}
+
+.hero-eyebrow {
+    color: #f2cf7b;
+}
+
+.hero-status-grid {
+    gap: 18px;
+    margin-top: 32px;
+}
+
+.hero-status-item {
+    padding: 21px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-status-item strong {
+    font-size: 19px;
+}
+
+/* Progress bar */
+
+.permit-progress-track {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.permit-progress-bar {
+    background: #78c46d;
+}
+
+/* Nächste Aufgaben */
+
+.task-list {
+    gap: 18px;
+}
+
+.task-list li {
+    min-height: 108px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #faf9f5;
+}
+
+/* Schnellzugriff */
+
+.quick-actions-grid {
+    gap: 20px;
+}
+
+.quick-action-button {
+    min-height: 112px;
+    padding: 20px;
+    border-radius: 17px;
+}
+
+.quick-action-button:hover {
+    border-color: var(--accent);
+}
+
+.quick-action-icon {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: #8a6112;
+}
+
+/* Formlar */
+
+input,
+select {
+    min-height: 50px;
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+    box-shadow:
+        0 0 0 4px rgba(217, 164, 65, 0.16);
+}
+
+.primary-button {
+    min-height: 50px;
+    border-radius: 11px;
+    background:
+        linear-gradient(
+            135deg,
+            #155e52,
+            #0c443c
+        );
+}
+
+.primary-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #0c443c,
+            #062f2a
+        );
+}
+
+/* Alt bilgi */
+
+.sidebar-footer {
+    padding: 22px 10px 0;
+}
+
+.page-footer {
+    margin-top: 50px;
+    padding-top: 28px;
+}
+
+/* Dark mode */
+
+body.dark-mode {
+    --background: #091916;
+    --surface: rgba(17, 43, 39, 0.88);
+    --surface-secondary: #102b27;
+
+    --text-primary: #f2f6f4;
+    --text-secondary: #afc1bd;
+
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .task-list li {
+    background: #102b27;
+}
+
+/* Mobil */
+
+@media (max-width: 850px) {
+    .main-content {
+        padding: 28px 20px 36px;
+    }
+
+    .topbar {
+        min-height: auto;
+    }
+
+    .topbar::after {
+        display: none;
+    }
+
+    .hero-panel {
+        padding: 24px;
+    }
+
+    .stats-grid {
+        gap: 16px;
+    }
+
+    .dashboard-grid {
+        gap: 20px;
+    }
 }

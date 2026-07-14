@@ -27,7 +27,7 @@
 
                 <div>
                     <h1>AufenthaltPlaner</h1>
-                    <p>Persönliche Übersicht</p>
+                    <p>Dein Aufenthalt. Gut organisiert.</p>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
 
             <header class="topbar">
                 <div>
-                    <p class="eyebrow">AUFENTHALTSORGANISATION</p>
+                    <p class="eyebrow">DEIN AUFENTHALT IM BLICK</p>
 
 <h2>Guten Tag, Melisa 👋</h2>
 
@@ -108,14 +108,35 @@
 
     <div class="hero-status-grid">
         <div class="hero-status-item">
-            <span class="hero-status-label">
-                Aufenthaltstitel
-            </span>
+    <span class="hero-status-label">
+        Aufenthaltstitel
+    </span>
 
-            <strong id="heroPermitStatus">
-                Noch nicht eingetragen
-            </strong>
-        </div>
+    <strong id="heroPermitStatus">
+        Noch nicht eingetragen
+    </strong>
+
+    <div
+        class="permit-progress-track"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+        id="permitProgressTrack"
+    >
+        <div
+            class="permit-progress-bar"
+            id="permitProgressBar"
+        ></div>
+    </div>
+
+    <span
+        class="permit-progress-label"
+        id="permitProgressLabel"
+    >
+        Kein Gültigkeitsdatum
+    </span>
+</div>
 
         <div class="hero-status-item">
             <span class="hero-status-label">
