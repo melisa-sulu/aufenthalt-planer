@@ -17,6 +17,7 @@ const STORAGE_KEYS = {
     theme: "aufenthaltPlaner.v2.theme",
     note: "aufenthaltPlaner.v2.note",
     authority: "aufenthaltPlaner.v2.authority"
+    userName: "aufenthaltPlaner.v2.userName",
 };
 
 /* ==================================================
@@ -1899,8 +1900,8 @@ function createDrawerContent(contentType) {
             </span>
 
             <h2 class="drawer-title">
-                Melisa Sülü
-            </h2>
+    ${escapeHtml(getUserName() || "Gast")}
+</h2>
 
             <p class="drawer-description">
                 Dein persönliches AufenthaltPlaner-Dashboard.
@@ -3071,7 +3072,82 @@ function refreshFullApplication() {
 /* ==================================================
    INITIALIZATION
    ================================================== */
+/* ==================================================
+   USER PERSONALIZATION
+   ================================================== */
 
+function getUserName() {
+    return loadFromStorage(
+        STORAGE_KEYS.userName,
+        ""
+    );
+}
+
+function createInitials(fullName) {
+    const nameParts = fullName
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    if (nameParts.length === 0) {
+        return "—";
+    }
+
+    if (nameParts.length === 1) {
+        return nameParts[0]
+            .slice(0, 2)
+            .toUpperCase();
+    }
+
+    return (
+        nameParts[0][0] +
+        nameParts[nameParts.length - 1][0]
+    ).toUpperCase();
+}
+
+function renderUserProfile() {
+    let fullName = getUserName();
+
+    if (!fullName) {
+        const enteredName = window.prompt(
+            "Willkommen beim AufenthaltPlaner!\nWie heißt du?"
+        );
+
+        fullName =
+            enteredName && enteredName.trim()
+                ? enteredName.trim()
+                : "Gast";
+
+        saveToStorage(
+            STORAGE_KEYS.userName,
+            fullName
+        );
+    }
+
+    const firstName =
+        fullName.split(/\s+/)[0];
+
+    const initials =
+        createInitials(fullName);
+
+    document
+        .querySelectorAll("[data-user-name]")
+        .forEach((element) => {
+            element.textContent = fullName;
+        });
+
+    document
+        .querySelectorAll("[data-user-first-name]")
+        .forEach((element) => {
+            element.textContent = firstName;
+        });
+
+    document
+        .querySelectorAll("[data-user-initials]")
+        .forEach((element) => {
+            element.textContent = initials;
+        });
+}
 function initializeApplication() {
     setText(
         currentDateElement,
@@ -3079,6 +3155,7 @@ function initializeApplication() {
     );
 
     loadTheme();
+    renderUserProfile();
 
     refreshFullApplication();
 
