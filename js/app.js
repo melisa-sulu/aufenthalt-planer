@@ -16,7 +16,7 @@ const STORAGE_KEYS = {
     applicationStatus: "aufenthaltPlaner.v2.applicationStatus",
     theme: "aufenthaltPlaner.v2.theme",
     note: "aufenthaltPlaner.v2.note",
-    authority: "aufenthaltPlaner.v2.authority"
+    authority: "aufenthaltPlaner.v2.authority",
     userName: "aufenthaltPlaner.v2.userName",
 };
 
