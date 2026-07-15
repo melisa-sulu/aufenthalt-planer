@@ -214,7 +214,7 @@ textarea {
 
     color: var(--navy);
 
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 900;
 
     letter-spacing: 0.05em;
@@ -228,7 +228,7 @@ textarea {
 }
 
 .brand-text h1 {
-    font-size: 19px;
+    font-size: 20px;
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
@@ -238,7 +238,7 @@ textarea {
 
     color: var(--text-secondary);
 
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.4;
 }
 
@@ -269,7 +269,7 @@ textarea {
 
     text-align: left;
 
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 650;
 
     transition:
@@ -314,7 +314,7 @@ textarea {
 
     color: var(--gold-dark);
 
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 900;
 }
 
@@ -358,7 +358,7 @@ textarea {
 }
 
 .sidebar-security strong {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .sidebar-security p {
@@ -366,7 +366,7 @@ textarea {
 
     color: var(--text-secondary);
 
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.55;
 }
 
@@ -413,7 +413,7 @@ textarea {
 
     flex: 0 0 40px;
 
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .profile-information {
